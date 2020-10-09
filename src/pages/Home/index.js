@@ -1,28 +1,37 @@
-import React, { Components } from "react";
-import { MdAddShoppingCart } from "react-icons/md";
+import React, { Component } from 'react';
+import { MdAddShoppingCart } from 'react-icons/md';
 
-import api from "../../services/api";
+import api from '../../services/api';
+import { formatPrice } from '../../util/format';
+import { ProductList } from './styles';
 
-import { ProductList } from "./styles";
+export default class Home extends Component {
+  state = {
+    products: [],
+  };
 
-export default class Home extends Components {
+  async componentDidMount() {
+    const response = await api.get('products');
+    this.setState({ products: response.data });
+  }
+
   render() {
+    const { products } = this.state;
     return (
       <ProductList>
-        <li>
-          <img
-            src="https://static.netshoes.com.br/produtos/tenis-puma-radiate-xt-pattern-feminino/44/NWG-0521-244/NWG-0521-244_zoom1.jpg"
-            alt="Tenis"
-          />
-          <strong>Tenis muito legal</strong>
-          <span>R$129,90</span>
-          <button type="button">
-            <div>
-              <MdAddShoppingCart size={36} color="#fff" />3
-            </div>
-            <span>Adicionar ao carrinho</span>
-          </button>
-        </li>
+        {products.map((product) => (
+          <li key={product.id}>
+            <img src={product.image} alt={product.title} />
+            <strong>{product.title}</strong>
+            <span>{formatPrice(product.price)}</span>
+            <button type="button">
+              <div>
+                <MdAddShoppingCart size={36} color="#fff" />3
+              </div>
+              <span>Adicionar ao carrinho</span>
+            </button>
+          </li>
+        ))}
       </ProductList>
     );
   }
