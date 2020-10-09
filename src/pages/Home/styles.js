@@ -61,9 +61,3 @@ export const ProductList = styled.ul`
     }
   }
 `;
-
-export const ProductList2 = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
-`;
