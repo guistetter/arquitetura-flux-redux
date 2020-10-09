@@ -13,11 +13,11 @@ export default function Cart() {
       <ProductTable>
         <thead>
           <tr>
-            <th />
+            <th> </th>
             <th>Produto</th>
             <th>Quantidade</th>
             <th>SUBTOTAL</th>
-            <th />
+            <th> </th>
           </tr>
         </thead>
         <tbody>
